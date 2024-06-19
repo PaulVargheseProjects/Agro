@@ -1,0 +1,68 @@
+{% extends 'user/shared/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row my-5">
+    <div class="col-md-6 offset-3 my-5 p-5 shadow bg-light text-center">
+      <h1>TAKE APPOINTMENT</h1>
+      <hr>
+      <form method="post" enctype="multipart/form-data" onsubmit="return validate()">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="name">Choose Lab Category</label>
+              <select name="lab" id="lab" class="form-control">
+                <option value="--">--------------</option>
+                {% for lab in labs %}
+                <option value="{{ lab.lab_type_id }}">{{ lab.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="name">Choose Test</label>
+              <select name="test" id="test" class="form-control">
+                <option value="--">--------------</option>
+              </select>
+            </div>
+            {{ form|crispy }}
+            <br>
+            <div class="form-group">
+                <button type="reset" class="btn btn-primary btn-secondary">Reset</button> 
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+      </form>
+    </div>
+</div>
+<script>
+  $(function(){
+    $('#lab').change(function(){
+      var lab_id = $(this).val();
+      $.ajax({
+        url: '/user/get_all_tests/',
+        data: {'lab_id': lab_id},
+        type: 'GET',
+        dataType: 'json',
+        success: function(data){
+          data = data['tests'];
+          $('#test').empty();
+          $('#test').append('<option value="--">--------------</option>');
+          $.each(data, function(index, value){
+            $('#test').append('<option value="'+value.test_id+'">'+value.name+'</option>');
+          });
+        }
+      });
+    });
+  });
+
+  function validate(){
+    var lab = $('#lab').val();
+    var test = $('#test').val();
+    if(lab == '--' || test == '--'){
+      alert('Please select lab and test');
+      return false;
+    }
+    return true;
+  }
+</script>
+{% endblock content %}
+    

@@ -1,0 +1,51 @@
+{% extends 'user/shared/base.html' %}
+
+
+{% block content %}
+<div class="row my-5">
+    <div class="col-md-12 text-center">
+      <h1>BOOKINGS</h1>
+      <hr>
+      <table class="table table-striped table-hover">
+          <tr>
+                <th>Sl No.</th>
+                <th>Lab Category</th>
+                <th>Test</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Booked Date&Time</th>
+                <th>Status</th>
+          </tr>
+          
+          {% for b in appointments %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ b.test.lab_type.name }}</td>
+            <td>{{ b.test.name }}</td>
+            <td>{{ b.date }}</td>
+            <td>{{ b.time }}</td>
+            <td>{{ b.booked_date }}</td>
+            <td>
+                
+                {% if b.status == 0 %}
+                    Booked and Pending for Confirmation
+                {% elif b.status == 1 %}
+                    Confirmed
+                {% elif b.status == 2 %}
+                    Cancelled
+                {% else %}
+                <a href="{% url 'user_lab_result' id=b.lab_book_id %}" class="btn btn-primary btn-sm">View Result</a>
+                {% endif %}
+                    
+            </td>
+          </tr>
+          {% endfor %}
+              
+      </table>
+      {% if not appointments %}
+        <p class="textcenter"><b><i>No appointments found.</i></b></p>
+      {% endif %}
+    </div>
+</div>
+{% endblock content %}
+    

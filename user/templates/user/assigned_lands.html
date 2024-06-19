@@ -1,0 +1,36 @@
+{% extends 'user/shared/base.html' %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-md-10 offset-1 text-center my-5">
+      <h1>ASSIGNED LAND DETAILES</h1>
+      <hr>
+      
+      {% if not l %}
+          <h4 class="text-center"><i>No Land Assigned</i></h4>
+      {% else %}
+          
+      <!-- Card -->
+        <div class="card">
+            <!-- Card image -->
+            <img class="card-img-top" src="/media/{{ l.land.image }}" alt="Card image cap">
+            <!-- Card content -->
+            <div class="card-body">
+                <!-- Title -->
+                <h4 class="card-title">{{ l.land.name }}</h4>
+                <!-- Text -->
+                <p class="card-text">{{ l.land.description }}</p>
+                <hr>
+                <p class="card-text">Location: {{ l.land.location }}</p>
+                <p class="card-text">Pin Code: {{ l.land.pin_code }}</p>
+                <p class="card-text">Price: INR {{ l.land.price }}/-</p>
+                <!-- Button -->
+                <a href="{% url 'landlord_assign_land' %}" class="btn btn-secondary">Back</a>
+            </div>
+        </div> 
+        {% endif %} 
+    </div>
+</div>
+{% endblock content %}
+    

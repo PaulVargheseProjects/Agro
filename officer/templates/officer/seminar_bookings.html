@@ -1,0 +1,54 @@
+{% extends 'officer/shared/base.html' %}
+
+
+{% block content %}
+<div class="row my-5">
+    <div class="col-md-12 text-center">
+      <h1>Seminar Booking History</h1>
+      <hr>
+      <table class="table table-striped table-hover">
+          <tr>
+                <th>Sl No.</th>
+                <th>Seminar</th>
+                <th>user</th>
+                <th>Date Booked</th>
+                <th>Status</th>
+                <th>Action</th>
+          </tr>
+          
+          {% for b in seminars %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ b.seminar }}</td>
+            <td>{{ b.user }}</td>
+            <td>{{ b.booked_date }}</td>
+            <td>
+                
+                {% if b.status == 0 %}
+                    Pending
+                {% elif b.status == 1 %}
+                    Seminar Accepted
+                {% elif b.status == 2 %}   
+                    Seminar Cancelled
+                {% else %}
+                    Seminar Completed
+                {% endif %}
+                    
+            </td>
+            <td>
+                <div class="btn-group">
+                    <a href="{% url 'officer_reject_seminar' pk=b.sem_book_id %}" class="btn btn-danger btn-sm">Reject</a>
+                    <a href="{% url 'officer_accept_seminar' pk=b.sem_book_id %}" class="btn btn-info btn-sm">Accept</a>
+                </div>
+            </td>
+          </tr>
+          {% endfor %}
+              
+      </table>
+        {% if not seminars %}
+            <p class="textcenter"><b><i>No incoming seminar bookings found.</i></b></p>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
+    

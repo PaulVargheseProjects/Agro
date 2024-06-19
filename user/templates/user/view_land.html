@@ -1,0 +1,47 @@
+{% extends 'user/shared/base.html' %}
+
+
+{% block content %}
+<div class="row my-5">
+    <div class="col-md-12">
+      <h1>Land List</h1>
+      <hr>
+
+        {% if not lands %}
+            <p class="text-center"><strong><i>No land found.</i></strong></p>
+        {% else %}
+            
+        {% for land in lands %}
+        <div class="row border p-4 my-3">
+            <div class="col-sm-6">
+                <img src="/media/{{land.image}}" width="100%" alt="">
+            </div>
+            <div class="col-sm-6">
+                <h3>{{land.name}}</h3>
+                <hr>
+                <p>{{land.description}}</p>
+                <p>
+                    <b>Location : {{ land.location }}</b>
+                </p>
+                <p>
+                    <b>Pin Code : {{ land.pin_code }}</b>
+                </p>
+                <p>
+                    <b>Phone : {{ land.user.phone }}</b>
+                </p>
+                <p class="text-left">
+                    <b>Rent Price : {{land.price}}/-</b>
+                </p>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="land_id" value="{{land.land_id}}">
+                    <button class="btn btn-outline-success">Book Now</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
+    

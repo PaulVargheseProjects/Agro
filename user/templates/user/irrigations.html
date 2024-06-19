@@ -1,0 +1,36 @@
+{% extends 'user/shared/base.html' %}
+
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12 text-center">
+    <div class="btn-group bg-dark my-3">
+      <a href="{% url 'user_crops' %}" class="btn btn-dark px-5 py-3 cat">CROPS</a>
+      <a href="{% url 'user_pesticides' %}" class="btn btn-dark px-5 py-3 cat">PESTICIDES</a>
+      <a href="{% url 'user_fertilizers' %}" class="btn btn-dark px-5 py-3 cat">FERTILIZER</a>
+      <a href="{% url 'user_irrigations' %}" class="btn btn-dark px-5 py-3 cat">IRRIGATION</a>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  {% for irrig in irrigations %}
+  <div class="col-sm-6">
+    <div class="card" style="height: 100%;">
+      <img src="/media/{{ irrig.image }}" height="300" alt="">
+      <div class="card-body">
+        <h5 class="card-title">{{ irrig.name }}</h5>
+        <p class="card-text">{{ irrig.description }}</p>
+        <p class="text-left">
+          <b> Price : {{ irrig.price }}/-</b>
+        </p>
+        <p class="text-left">
+          <b> Stock : </b>{% if irrig.is_available %}<span class="badge badge-success">IN</span>{% else %}<span class="badge badge-danger">OUT</span>{% endif %}
+        </p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock content %}
+    

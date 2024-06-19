@@ -1,0 +1,79 @@
+{% extends 'user/shared/base.html' %}
+
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12 text-center">
+    <div class="btn-group bg-dark my-3">
+      <button class="btn btn-dark px-5 py-3 cat">All</button>
+      <button class="btn btn-dark px-5 py-3 cat">Cereals/Grains</button>
+      <button class="btn btn-dark px-5 py-3 cat">Fruits</button>
+      <button class="btn btn-dark px-5 py-3 cat">Vegetables</button>
+    </div>
+  </div>
+</div>
+
+<div class="row" id="products">
+    
+</div>
+
+<script>
+  $(document).ready(function(){
+    getProducts('All');
+    $('.cat').click(function(){
+      var cat = $(this).text();
+      getProducts(cat);
+    });
+
+    function getProducts(cat){
+      $.ajax({
+        url: "{% url 'user_get_product_by_category' %}",
+        type: 'GET',
+        data: {
+          category: cat
+        },
+        dataType: 'json',
+        success: function(data){
+          console.log(data);
+          var products = data.products;
+          var html = '';
+          for(var i = 0; i < products.length; i++){
+            html += '<div class="col-md-4 my-4">';
+            html += '<form method="POST" style="height: 100%;">{% csrf_token %}';
+            html += '<div class="card" style="height: 100%;">';
+            html += '<input type="hidden" name="product_id" value="'+products[i].product_id+'">';
+            html += '<img src="/media/'+products[i].image+'" height="250" class="card-img-top" alt="...">';
+            html += '<div class="card-body">';
+            html += '<h5 class="card-title">'+products[i].name+'</h5>';
+            html += '<p class="card-text">'+products[i].description+'</p>';
+            html += '<p><b> Price : '+products[i].price+'/Kg</b></p>';
+            html += '<p><b> Category : '+products[i].category+'</b></p>';
+            if(products[i].stock > 10){
+              html += '<p><b> Available Stock : <span class="badge badge-success">'+products[i].stock+'</span></b></p>';
+            }else if(products[i].stock > 0){
+              html += '<p><b> Available Stock : <span class="badge badge-warning">'+products[i].stock+'</span></b></p>';
+            }else{
+              html += '<p><b> Available Stock : <span class="badge badge-danger">Out of Stock</span></b></p>';
+            }
+            html += '<p><b> Quantity : <input type="number" min="1" max="'+ products[i].stock +'" style="width: 50px;" value="1" name="qty" id="qty">Kg</b></p>';
+            if(products[i].stock > 0){
+              html += '<p class="text-right"><button class="btn btn-outline-warning">Add to Cart</button></p>';
+            }else{
+              html += '<p class="text-right"><button class="btn btn-outline-warning" disabled>Add to Cart</button></p>';
+            }
+            html += '</div>';
+            html += '</div>';
+            html += '</form>';
+            html += '</div>';
+          }
+          $('#products').html(html);
+        }
+      });
+    }
+
+
+  });
+</script>
+
+
+{% endblock content %}

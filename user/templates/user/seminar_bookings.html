@@ -1,0 +1,53 @@
+{% extends 'user/shared/base.html' %}
+
+
+{% block content %}
+<div class="row my-5">
+    <div class="col-md-12 text-center">
+      <h1>Seminar Booking History</h1>
+      <hr>
+      <table class="table table-striped table-hover">
+          <tr>
+                <th>Sl No.</th>
+                <th>Seminar</th>
+                <th>Date Booked</th>
+                <th>Status</th>
+                <th>Action</th>
+          </tr>
+          
+          {% for b in seminars %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ b.seminar }}</td>
+            <td>{{ b.booked_date }}</td>
+            <td>
+                
+                {% if b.status == 0 %}
+                    Seminar Booked waiting for approval
+                {% elif b.status == 1 %}
+                    Seminar Accepted
+                {% else %}
+                    Seminar Cancelled
+                {% endif %}
+                    
+            </td>
+            <td>
+                
+                {% if b.status == 0 %}
+                <div class="btn-group">
+                    <a href="{% url 'user_delete_seminar_booking' id=b.sem_book_id %}" class="btn btn-danger btn-sm">Delete Booking</a>
+                </div>
+                {% endif %}
+                    
+            </td>
+          </tr>
+          {% endfor %}
+              
+      </table>
+        {% if not seminars %}
+            <p class="textcenter"><b><i>No seminar bookings found.</i></b></p>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
+    

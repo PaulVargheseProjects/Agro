@@ -1,0 +1,53 @@
+{% extends 'lab/shared/base.html' %}
+
+
+{% block content %}
+<div class="row my-5">
+    <div class="col-md-12 text-center">
+      <h1>CONFIRMED APPOINTMENT LIST</h1>
+      <hr>
+      <table class="table table-striped table-hover">
+          <tr>
+                <th>Sl No.</th>
+                <th>Lab</th>
+                <th>Test</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Booked Date</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Action</th>
+          </tr>
+          
+          {% for b in appointments %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ b.test.lab_type.name }}</td>
+            <td>{{ b.test.name }}</td>
+            <td>{{ b.date }}</td>
+            <td>{{ b.time }}</td>
+            <td>{{ b.booked_date }}</td>
+            <td>{{ b.user.first_name }} {{ b.user.last_name }}</td>
+            <td>{{ b.user.phone }}</td>
+            <td>
+                <div class="btn-group">
+                    
+                    {% if b.status == 1 %}
+                        <a href="{% url 'lab_result' id=b.lab_book_id %}" class="btn btn-success btn-sm">Upload Result</a>
+                    {% elif b.status == 3 %}
+                        <a href="{% url 'lab_result_details' id=b.lab_book_id %}" class="btn btn-primary btn-sm">View Result</a>
+                    {% endif %}
+                    
+                </div>
+            </td>
+          </tr>
+          {% endfor %}
+              
+      </table>
+      {% if not appointments %}
+        <p class="textcenter"><b><i>No appointments found.</i></b></p>
+      {% endif %}
+    </div>
+</div>
+{% endblock content %}
+    

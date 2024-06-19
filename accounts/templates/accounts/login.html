@@ -1,0 +1,23 @@
+{% extends 'accounts/shared/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row my-5">
+    <div class="col-md-6 offset-3 my-5 p-5 shadow bg-light text-center">
+      <h1>LOGIN</h1>
+      <hr>
+      <form method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <br>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+                <br/>
+                <button type="reset" class="btn btn-primary btn-secondary">Reset</button>
+            </div>
+      </form>
+    </div>
+</div>
+{% endblock content %}
+    

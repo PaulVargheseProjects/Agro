@@ -1,0 +1,39 @@
+{% extends 'officer/shared/base.html' %}
+
+
+{% block content %}
+<div class="row my-5">
+    <div class="col-md-12 text-center">
+      <h1>Manage Scheme</h1>
+      <hr>
+      <table class="table table-striped table-hover">
+          <tr>
+                <th>Sl No.</th>
+                <th>Scheme Name</th>
+                <th>Description</th>
+                <th>Created Date</th>
+                <th>Action</th>
+          </tr>
+          
+          {% for b in schemes %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ b.name }}</td>
+            <td>{{ b.description }}</td>
+            <td>{{ b.created_date }}</td>
+            <td>
+                <div class="btn-group">
+                    <a href="{% url 'officer_delete_scheme' pk=b.gov_id %}" class="btn btn-danger btn-sm">Delete</a>
+                </div>
+            </td>
+          </tr>
+          {% endfor %}
+              
+      </table>
+        {% if not schemes %}
+            <p class="textcenter"><b><i>No scheme found.</i></b></p>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
+    

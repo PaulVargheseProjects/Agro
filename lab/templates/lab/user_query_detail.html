@@ -1,0 +1,52 @@
+{% extends 'lab/shared/base.html' %}
+
+
+{% block content %}
+<div class="row my-5">
+    <div class="col-md-12">
+      <h1>Query Detailed View</h1>
+      <hr>
+        <div class="row border p-4 my-3">
+            <div class="col-sm-12">
+                <h3>Query</h3>
+                <hr>
+                <p>{{q.query}}</p>
+            </div>
+        </div>
+        <div class="row border p-4 my-3">
+            <div class="col-sm-12">
+                <h3>Reply</h3>
+                <hr>
+                <p id="view_reply">{{q.reply}}</p>
+                <form method="post" id="edit_reply">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <textarea class="form-control" id="reply" name="reply" rows="6">{{q.reply}}</textarea>
+                    </div>
+                    <div class="form-group text-right" >
+                        <button type="button" id="cancel" class="btn btn-secondary">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+                <a class="btn btn-warning float-right" id="btn">Edit Reply</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+        $("#edit_reply").hide();
+        $("#btn").click(function(){
+            $("#edit_reply").show();
+            $("#view_reply").hide();
+            $("#btn").hide();
+        });
+        $("#cancel").click(function(){
+            $("#edit_reply").hide();
+            $("#view_reply").show();
+            $("#btn").show();
+        });
+    });
+</script>
+{% endblock content %}
+    

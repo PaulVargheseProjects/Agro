@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-sm navbar-dark">
+    <a class="navbar-brand" href="#">AGRO</a>
+    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+        aria-expanded="false" aria-label="Toggle navigation"></button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <!-- <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li> -->
+            <!-- <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle active" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Agricultural lab</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownId">
+                    <a class="dropdown-item" href="{% url 'lab_appointments' %}">Appointments</a>
+                    <a class="dropdown-item" href="{% url 'lab_appointment_list' %}">Results</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle active" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Food safety lab</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownId">
+                    <a class="dropdown-item" href="{% url 'lab_appointments' %}">Appointments</a>
+                    <a class="dropdown-item" href="{% url 'lab_appointment_list' %}">Results</a>
+                </div>
+            </li> -->
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'lab_appointments' %}">Appointments</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'lab_appointment_list' %}">Results</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'lab_user_query' %}">User Query</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'accounts_logout' %}">Logout</a>
+            </li>
+            
+        </ul>
+    </div>
+</nav>

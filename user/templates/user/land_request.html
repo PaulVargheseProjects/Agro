@@ -1,0 +1,60 @@
+{% extends 'user/shared/base.html' %}
+
+
+{% block content %}
+<div class="row my-5">
+    <div class="col-md-12 text-center">
+      <h1>INCOMING LAND REQUEST</h1>
+      <hr>
+      <table class="table table-striped table-hover">
+          <tr>
+                <th>Sl No.</th>
+                <th>Land</th>
+                <th>Image</th>
+                <th>User</th>
+                <th>Phone</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Action</th>
+          </tr>
+          
+          {% for l in lands %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ l.land.name }}</td>
+            <td><img src="/media/{{ l.land.image }}" width="200" alt=""></td>
+            <td>{{ l.user.first_name }} {{ l.user.last_name }}</td>
+            <td>{{ l.user.phone }}</td>
+            <td>{{ l.booked_date }}</td>
+            <td>
+                
+                {% if l.status == 0 %}
+                    Pending
+                {% elif l.status == 1 %}
+                    Approved
+                {% else %}
+                    Rejected
+                {% endif %}
+                    
+            </td>
+            
+            {% if l.user != request.user %}
+            <td>
+                <div class="btn-group">
+                    <a href="{% url 'user_accept_land_booking' id=l.land_book_id %}" class="btn btn-primary btn-sm">Accept</a>
+                    <a href="{% url 'user_reject_land_booking' id=l.land_book_id %}" class="btn btn-danger btn-sm">Reject</a>
+                </div>
+            </td>
+            {% endif %}
+                
+          </tr>
+          {% endfor %}
+              
+      </table>
+      {% if not lands %}
+        <p class="textcenter"><b><i>No incoming land requests found.</i></b></p>
+      {% endif %}
+    </div>
+</div>
+{% endblock content %}
+    

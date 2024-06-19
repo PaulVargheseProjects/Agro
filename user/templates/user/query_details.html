@@ -1,0 +1,27 @@
+{% extends 'user/shared/base.html' %}
+
+
+{% block content %}
+<div class="row my-5">
+    <div class="col-md-12">
+      <h1>Query Detailed View</h1>
+      <hr>
+        <div class="row border p-4 my-3">
+            <div class="col-sm-12">
+                <h3>Query</h3>
+                <hr>
+                <p>{{q.query}}</p>
+            </div>
+        </div>
+        <hr>
+        <div class="row border p-4 my-3">
+            <div class="col-sm-12">
+                <h3>Reply</h3>
+                <hr>
+                <p>{{q.reply}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+    

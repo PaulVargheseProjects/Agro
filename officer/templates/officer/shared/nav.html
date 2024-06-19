@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-sm navbar-dark">
+    <a class="navbar-brand" href="#">AGRO</a>
+    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+        aria-expanded="false" aria-label="Toggle navigation"></button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'officer_index' %}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle active" active href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Products</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownId">
+                    <a class="dropdown-item" href="{% url 'officer_manage_crops' %}">Crops</a>
+                    <a class="dropdown-item" href="{% url 'officer_manage_pesticide' %}">Pesticides</a>
+                    <a class="dropdown-item" href="{% url 'officer_manage_fertilizer' %}">Fertilizers</a>
+                    <a class="dropdown-item" href="{% url 'officer_manage_irrigation' %}">Irrigations</a>
+                </div>
+            </li>
+            <!-- <li class="nav-item active">
+                <a class="nav-link" href="{% url 'officer_manage_lab' %}">Manage Lab</a>
+            </li> -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle active" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Seminar</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownId">
+                    <a class="dropdown-item" href="{% url 'officer_create_seminar' %}">Add</a>
+                    <a class="dropdown-item" href="{% url 'officer_manage_seminar' %}">Manage</a>
+                    <a class="dropdown-item" href="{% url 'officer_seminar_booking' %}">Bookings</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle active" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Schemes</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownId">
+                    <a class="dropdown-item" href="{% url 'officer_create_scheme' %}">Create</a>
+                    <a class="dropdown-item" href="{% url 'officer_manage_scheme' %}">Manage</a>
+                </div>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'officer_user_query' %}">User Query</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'accounts_logout' %}">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>

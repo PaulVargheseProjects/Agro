@@ -1,0 +1,25 @@
+{% extends 'user/shared/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row my-2">
+    <div class="col-sm-12 text-right">
+        <a href="{% url 'user_user_query' %}" class="btn btn-primary">Back</a>
+    </div>
+    <div class="col-md-6 offset-3 my-5 p-5 shadow bg-light text-center">
+      <h1>CREATE QUERY</h1>
+      <hr>
+      <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <br>
+            <div class="form-group">
+                <button type="reset" class="btn btn-primary btn-secondary">Reset</button>   
+                <button type="submit" class="btn btn-primary btn-block">Send</button>
+            </div>
+      </form>
+    </div>
+</div>
+{% endblock content %}
+    

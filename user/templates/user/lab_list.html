@@ -1,0 +1,40 @@
+{% extends 'user/shared/base.html' %}
+
+
+{% block content %}
+<div class="row my-5">
+    <div class="col-md-12 text-center">
+      <h1>Lab List</h1>
+      <hr>
+      <table class="table table-striped table-hover">
+          <tr>
+                <th>Sl No.</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Registration No.</th>
+                <th>Action</th>
+          </tr>
+          
+          {% for lab in labs %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ lab.name }}</td>
+            <td>{{ lab.address }}</td>
+            <td>{{ lab.email }}</td>
+            <td>{{ lab.phone }}</td>
+            <td>{{ lab.registration_number }}</td>
+            <td>
+                <div class="btn-group">
+                    <a href="{% url 'officer_delete_lab' pk=lab.lab_id %}" class="btn btn-danger btn-sm">Take Appointment</a>
+                </div>
+            </td>
+          </tr>
+          {% endfor %}
+              
+      </table>
+    </div>
+</div>
+{% endblock content %}
+    

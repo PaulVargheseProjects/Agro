@@ -1,0 +1,46 @@
+{% extends 'user/shared/base.html' %}
+
+
+{% block content %}
+<div class="row my-5">
+    <div class="col-md-12 text-center">
+      <h1>MANAGE LAND</h1>
+      <hr>
+      <table class="table table-striped table-hover">
+          <tr>
+                <th>Sl No.</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Location</th>
+                <th>Pin Code</th>
+                <th>Price</th>
+                <th>Action</th>
+          </tr>
+          
+          {% for land in lands %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ land.name }}</td>
+            <td class="text-justify">{{ land.description }}</td>
+            <td><img src="/media/{{ land.image }}" width="200" alt=""></td>
+            <td>{{ land.location }}</td>
+            <td>{{ land.pin_code }}</td>
+            <td>{{ land.price }}</td>
+            <td>
+                <div class="btn-group">
+                    <a href="{% url 'user_update_land' land_id=land.land_id %}" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="{% url 'user_delete_land' land_id=land.land_id %}" class="btn btn-danger btn-sm">Delete</a>
+                </div>
+            </td>
+          </tr>
+          {% endfor %}
+              
+      </table>
+      {% if not lands %}
+        <p class="textcenter"><b><i>No land found.</i></b></p>
+      {% endif %}
+    </div>
+</div>
+{% endblock content %}
+    

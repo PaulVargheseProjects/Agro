@@ -1,0 +1,120 @@
+{% extends 'lab/shared/base.html' %}
+
+
+{% block content %}
+<div class="row my-5">
+    <div class="col-md-12 text-center">
+      <h1>NEW APPOINTMENT LIST</h1>
+      <hr>
+      <form method="post" onsubmit="return validate()">
+            {% csrf_token %}   
+            <div class="row my-3">
+                <div class="col-sm-2">
+                    <label for="">Select Lab Type:</label>
+                </div>
+                <div class="col-sm-3">
+                    <select name="lab" id="lab" class="form-control">
+                        <option value="--">--------------</option>
+                        {% for lab in labs %}
+                        <option value="{{ lab.lab_type_id }}">{{ lab.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <label for="">Select Test Type:</label>
+                </div>
+                <div class="col-sm-3">
+                    <select name="test" id="test" class="form-control">
+                        <option value="--">--------------</option>
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-primary">Get</button>
+                </div>
+            </div>
+        </form>
+      <table class="table table-striped table-hover">
+          <tr>
+                <th>Sl No.</th>
+                <th>Lab</th>
+                <th>Test</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Booked Date</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Status</th>
+                <th>Action</th>
+          </tr>
+          
+          {% for b in appointments %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ b.test.lab_type.name }}</td>
+            <td>{{ b.test.name }}</td>
+            <td>{{ b.date }}</td>
+            <td>{{ b.time }}</td>
+            <td>{{ b.booked_date }}</td>
+            <td>{{ b.user.first_name }} {{ b.user.last_name }}</td>
+            <td>{{ b.user.phone }}</td>
+            <td>
+                
+                {% if b.status == 0 %}
+                    Pending
+                {% elif b.status == 1 %}
+                    Confirmed
+                {% elif b.status == 2 %}
+                    Cancelled
+                {% endif %}
+                    
+            </td>
+            <td>
+                <div class="btn-group">
+                    <a href="{% url 'lab_confirm_appointment' id=b.lab_book_id %}" class="btn btn-primary btn-sm">Confirm</a>
+                    <a href="{% url 'lab_cancel_appointment' id=b.lab_book_id %}" class="btn btn-danger btn-sm">Cancel</a>
+                </div>
+            </td>
+          </tr>
+          {% endfor %}
+              
+      </table>
+      {% if not appointments %}
+        <p class="textcenter"><b><i>No appointments found.</i></b></p>
+      {% endif %}
+    </div>
+</div>
+
+<script>
+    $(function(){
+      $('#lab').change(function(){
+        var lab_id = $(this).val();
+        $.ajax({
+          url: '/user/get_all_tests/',
+          data: {'lab_id': lab_id},
+          type: 'GET',
+          dataType: 'json',
+          success: function(data){
+            data = data['tests'];
+            $('#test').empty();
+            $('#test').append('<option value="--">--------------</option>');
+            $.each(data, function(index, value){
+              $('#test').append('<option value="'+value.test_id+'">'+value.name+'</option>');
+            });
+          }
+        });
+      });
+    });
+  
+    function validate(){
+      var lab = $('#lab').val();
+      var test = $('#test').val();
+      if(lab == '--' || test == '--'){
+        alert('Please select lab and test');
+        return false;
+      }
+      return true;
+    }
+  </script>
+
+{% endblock content %}
+    

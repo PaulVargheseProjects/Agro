@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-sm navbar-dark">
+    <a class="navbar-brand" href="#">AGRO</a>
+    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+        aria-expanded="false" aria-label="Toggle navigation"></button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'user_index' %}">Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'user_crops' %}">Agro Products<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'user_your_bookings' %}">Your Orders<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle active" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Products</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownId">
+                    <a class="dropdown-item" href="{% url 'user_create_product' %}">Add Product</a>
+                    <a class="dropdown-item" href="{% url 'user_manage_product' %}">Manage Product</a>
+                    <a class="dropdown-item" href="{% url 'user_incoming_orders' %}">Incoming Orders</a>
+                    <a class="dropdown-item" href="{% url 'user_order_history' %}">Order History</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle active" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Land</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownId">
+                    <a class="dropdown-item" href="{% url 'user_view_land' %}">View Land</a>
+                    <a class="dropdown-item" href="{% url 'user_create_land' %}">Add Land</a>
+                    <a class="dropdown-item" href="{% url 'user_manage_land' %}">Manage Land</a>
+                    <a class="dropdown-item" href="{% url 'user_land_booking' %}">Incoming Requests </a>
+                    <a class="dropdown-item" href="{% url 'user_land_request_status' %}">Land Requests Status </a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle active" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Seminar</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownId">
+                    <a class="dropdown-item" href="{% url 'user_upcoming_seminar' %}">Upcoming Seminars</a>
+                    <a class="dropdown-item" href="{% url 'user_seminar_booking' %}">Seminar Bookings</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle active" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Lab Test</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownId">
+                    <a class="dropdown-item" href="{% url 'user_lab_appointment' %}">Appointment</a>
+                    <a class="dropdown-item" href="{% url 'user_lab_appointment_status' %}">Appointment Status</a>
+                </div>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'user_user_query' %}">Query</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'accounts_logout' %}">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>

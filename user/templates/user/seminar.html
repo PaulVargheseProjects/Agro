@@ -1,0 +1,70 @@
+{% extends 'user/shared/base.html' %}
+
+
+{% block content %}
+<div class="row my-5">
+    <div class="col-md-12 text-center">
+      <h1>Seminar List</h1>
+      <hr>
+        <div class="row">
+            
+            {% if not seminars %}
+                <p class="text-center"><strong><i>No seminar found</i></strong></p>
+            
+            {% else %}
+                
+            {% for sem in seminars %}
+                <div class="col-sm-6">
+                    <!-- Card -->
+                    <div class="card" style="height: 100%;">
+                        <!-- Card Head -->
+                        <div class="card-header">
+                            <h3>{{ sem.name }}</h3>
+                        </div>
+                        <!-- Card content -->
+                        <div class="card-body">
+                            <h5>Description</h5>
+                            <p class="card-text">{{ sem.description }}</p>
+                            <table class="table table-borderless">
+                                
+                                <tr>
+                                    <th>Date</th>
+                                    <th>:</th>
+                                    <th>{{ sem.date }}</th>
+                                </tr>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>:</th>
+                                    <th>{{ sem.time }}</th>
+                                </tr>
+                                <tr>
+                                    <th>Conducted By</th>
+                                    <th>:</th>
+                                    <th>{{ sem.conducted_by }}</th>
+                                </tr>
+                                <tr>
+                                    <th>Location</th>
+                                    <th>:</th>
+                                    <th>{{ sem.location }}</th>
+                                </tr>
+                            </table>
+                            <!-- Button -->
+                            
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="seminar_id" value="{{ sem.sem_id }}">
+                                    <p class="text-right">
+                                    <button type="submit"  class="btn btn-outline-primary">Book Now</button>
+                                    </p>
+                                </form>
+                            
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
+    

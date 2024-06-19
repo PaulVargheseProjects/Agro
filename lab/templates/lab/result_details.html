@@ -1,0 +1,35 @@
+{% extends 'lab/shared/base.html' %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 offset-3 text-center my-5">
+      <h1>RESULT</h1>
+      <table class="table table-borderless text-left">
+            <tr>
+                <th>Result Description</th>
+                <td>:</td>
+                <td>
+                    {{ result.result }}
+                </td>
+            </tr>
+            <tr>
+                <th>File</th>
+                <td>:</td>
+                <td>
+                    <a href="/media/{{ result.file }}" target="_blank" class="btn btn-outline-primary">View</a>
+                </td>
+            </tr>
+            <tr>
+                <th>Result Uploaded Date</th>
+                <td>:</td>
+                <td>
+                    {{ result.date }}
+                </td>
+            </tr>
+      </table>
+      <a href="{% url 'lab_appointment_list' %}" class="btn btn-secondary">back</a>
+    </div>
+</div>
+{% endblock content %}
+    

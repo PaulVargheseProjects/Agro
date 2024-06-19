@@ -1,0 +1,29 @@
+{% extends 'accounts/shared/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row my-5">
+    <div class="col-md-8 offset-2 my-5 p-5 text-center shadow bg-light">
+      <h1>Admin SignUp</h1>
+      <hr>
+      <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">User Type</label>
+                <select class="form-control" name="user_type">
+                    <option value="officer" selected>Officer</option>
+                    <option value="lab">Lab</option>
+                </select>
+            </div>
+            {{ form|crispy }}
+            <br>
+            <div class="form-group">
+                <button type="reset" class="btn btn-primary btn-secondary">Reset</button>
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </div>
+      </form>
+    </div>
+</div>
+{% endblock content %}
+    
